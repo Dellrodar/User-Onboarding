@@ -94,6 +94,9 @@ function Form() {
           value={formState.name}
           onChange={inputChange}
         />
+        {errorState.name.length > 0 ? (
+            <p className="error">{errorState.name}</p>
+          ) : null}
       </label>
       <label htmlFor="email">
         Email
