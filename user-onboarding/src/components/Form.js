@@ -82,10 +82,17 @@ function Form() {
     axios
       .post("https://reqres.in/api/users", formState)
       .then( (response) => {
-        setUsers(JSON.stringify(response.data, ["name"]))
+        try {
+          const userData = JSON.stringify(response.data, ["name"]);
+          setUsers([ ...users, userData ]);
+        } catch(error) {
+          console.log(error);
+        }
       })
       .catch(err => console.log(err));
   };
+
+  console.log(users);
 
   return (
     <div className ="parentContainer">
@@ -145,7 +152,7 @@ function Form() {
       <button disabled={buttonDisabled}>Submit</button>
     </form>
     <div>
-      <p> {users.name} has just joined!</p>
+      <pre>{users}</pre>
     </div>
   </div>
   );
