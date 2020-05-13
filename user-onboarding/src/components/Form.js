@@ -71,19 +71,24 @@ function Form() {
     setFormState({ ...formState, [e.target.name]: value });
   };
 
+  //User state to an empty array
+  const [users, setUsers] = useState([])
+
   // Basic submit event handler and console.log to confirm form submitted
+
   const formSubmit = e => {
     e.preventDefault();
     console.log("form submitted!");
     axios
       .post("https://reqres.in/api/users", formState)
-      .then(response =>
-        console.log(response)
-        )
+      .then( (response) => {
+        setUsers(JSON.stringify(response.data, ["name"]))
+      })
       .catch(err => console.log(err));
   };
 
   return (
+    <div className ="parentContainer">
     <form onSubmit={formSubmit}>
       <label htmlFor="name">
         Name
@@ -94,7 +99,7 @@ function Form() {
           value={formState.name}
           onChange={inputChange}
         />
-        {errorState.name.length > 0 ? (
+        {errorState.name.length > 1 ? (
             <p className="error">{errorState.name}</p>
           ) : null}
       </label>
@@ -139,6 +144,10 @@ function Form() {
       </label>
       <button disabled={buttonDisabled}>Submit</button>
     </form>
+    <div>
+      <p> {users.name} has just joined!</p>
+    </div>
+  </div>
   );
 }
 
