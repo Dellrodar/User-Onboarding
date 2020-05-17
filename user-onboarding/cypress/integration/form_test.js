@@ -43,7 +43,7 @@ describe("Form Testing", () => {
   it("Testing password Input", () => {
     cy.get('#password')
     .type("12345678")
-    .should("have.length", )
+    .should("have.length", 8 )
     .should( ($password) => {
       expect($password).to.have.length(8)
     })
@@ -57,7 +57,7 @@ describe("Form Testing", () => {
       cy.get("form").submit();
     });
 
-  describe("Testing Submit if input is blank", () => {
+  describe("Testing Submit If input is blank", () => {
     it("display form validation", () => {
       cy.get('#name').type("Test").should("not.have.value", "").clear();
       cy.get("form").submit();
