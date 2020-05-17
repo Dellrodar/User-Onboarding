@@ -105,6 +105,7 @@ function Form() {
           id="name"
           value={formState.name}
           onChange={inputChange}
+          dataCy="name-input"
         />
         {errorState.name.length > 1 ? (
             <p className="error">{errorState.name}</p>
